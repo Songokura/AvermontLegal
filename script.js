@@ -46,19 +46,20 @@ var EN = {
   "meta.ogt": "Avermont Legal - business law firm in Almaty, Kazakhstan",
   "meta.ogd": "Disputes and debt recovery, immigration, AIFC, corporate law and M&A, business abroad. English and Russian.",
   "aria.lang": "Site language", "aria.call": "Call", "aria.menu": "Menu",
-  "nav.spory": "Disputes", "nav.migraciya": "Immigration", "nav.za": "International", "nav.korp": "Corporate", "nav.ip": "IP & franchising", "nav.podhod": "Approach", "nav.kontakty": "Contact", "nav.keysy": "Cases", "nav.admin": "Public-law disputes",
-  "m.spory": "Disputes and debt recovery", "m.migraciya": "Immigration and visas", "m.aifc": "AIFC", "m.za": "Business abroad", "m.korp": "Corporate law and M&A", "m.ip": "IP and franchising", "m.podhod": "How we work", "m.kontakty": "Contact", "m.keysy": "Case studies", "m.admin": "Administrative and procurement disputes",
+  "nav.spory": "Disputes", "nav.migraciya": "Immigration", "nav.za": "International", "nav.korp": "Corporate", "nav.ip": "IP & franchising", "nav.podhod": "Approach", "nav.kontakty": "Contact", "nav.keysy": "Cases", "nav.pub": "Publications", "nav.admin": "Public-law disputes",
+  "m.spory": "Disputes and debt recovery", "m.migraciya": "Immigration and visas", "m.aifc": "AIFC", "m.za": "Business abroad", "m.korp": "Corporate law and M&A", "m.ip": "IP and franchising", "m.podhod": "How we work", "m.kontakty": "Contact", "m.keysy": "Case studies", "m.pub": "Publications", "m.admin": "Administrative and procurement disputes",
   "hero.alt": "Almaty: business district and the Zailiysky Alatau mountains",
-  "hero.kick": "Almaty, Kazakhstan · Business law firm · EN / RU",
+  "hero.kick": "Almaty, Kazakhstan · Business law firm",
   "hero.big": "Business law firm",
-  "hero.sub": "Disputes, transactions, investment, AIFC and immigration - in Kazakhstan and abroad",
-  "hero.lead": "Recovery of substantial debts and commercial litigation, visas and residence permits, AIFC and foreign company formation. 11 years of practice, 7 jurisdictions, full service in English and Russian.",
+  "hero.sub": "We represent businesses before courts and in international arbitration, support transactions and AIFC incorporation, and run immigration and international projects - in Kazakhstan and abroad",
+  "hero.tags": "Disputes · M&amp;A · AIFC · Visas · Franchising · International business · Public-law disputes",
+  "hero.lead": "Litigation of any complexity, including before the AIFC Court and the International Arbitration Centre (IAC), support for transactions, franchises and startups, and immigration assistance. 11 years of practice, 7 jurisdictions, full service in English and Russian.",
   "hero.b1": "Discuss your matter", "hero.b2": "Practice areas",
   "cta.wa": "Discuss your matter",
   "p1.kick": "Споры · Взыскание долгов", "p1.h2": "Disputes and <em>debt recovery</em>",
   "p1.l1": "Commercial and corporate disputes, including shareholder and partner conflicts",
   "p1.l2": "Recovery of substantial debts: demand letters, litigation, interim measures, enforcement",
-  "p1.l3": "Representation before the courts of Kazakhstan at all levels, up to cassation",
+  "p1.l3": "Representation before the courts of Kazakhstan at every level - from first instance to the Supreme Court of the Republic of Kazakhstan, including applications for a submission by the Chairman of the Supreme Court",
   "p1.l4": "Case strategy before filing: assessment of merits, evidence and risks",
   "p1.note": "We act for businesses in matters of significant value. No consumer or personal cases.",
   "p1.alt": "Boardroom in a business centre overlooking the city", "p1.word": "Disputes",
@@ -109,6 +110,11 @@ var EN = {
   "p7.l4": "Public procurement disputes and challenges, including Samruk-Kazyna procurement and the Goszakup system",
   "p7.note": "We represent businesses in disputes with state authorities, national companies and procuring entities.",
   "p7.alt": "A lawyer and a client reviewing documents at a desk", "p7.word": "State",
+  "pub.kick": "Publications", "pub.h2": "Guides and articles <em>for business</em>", "pub.all": "All publications",
+  "pub.lead": "Practical guides and legal updates from Avermont Legal. Each publication opens right on the page as a PDF.",
+  "pub.back": "All publications",
+  "pubp.title": "Publications - Avermont Legal: guides and articles for business",
+  "pubp.desc": "Avermont Legal guides and legal updates for business: Astana Hub, AIFC, corporate law, disputes and immigration. Read the PDFs right on the site.",
   "cs.kick": "Case studies", "cs.h2": "Case studies: <em>situation, action, result</em>",
   "cs.lead": "Anonymised examples across our practice areas. We do not disclose client names or details that could identify them.",
   "cs.ls": "Situation", "cs.lw": "What we did", "cs.lr": "Result", "cs.more": "How it went",
@@ -167,18 +173,18 @@ var EN = {
   "op.lead": "Avermont Legal is not a general-practice firm for every occasion. We are a business law firm for companies, entrepreneurs and investors. Our director has practised for 11 years: transactions, disputes and structures for international and large-scale business.",
   "op.f1": "years of the director's legal practice advising international and large-scale business",
   "op.f2": "jurisdictions: Kazakhstan, UAE, USA, United Kingdom, Singapore, Hong Kong, China",
-  "op.f3": "full service in two languages: documents, negotiations, correspondence",
+  "op.f3": "full service in three languages: documents, negotiations, correspondence",
   "op.f4": "English law inside Kazakhstan: incorporation, AIFC Court, IAC arbitration",
   "op.alt": "Glass facade of a business centre",
   "ph.kick": "Approach", "ph.h2": "How we work",
   "ph.lead": "Four steps from the first message to the result. No \"free consultations\" and no promises - assessment, terms and work.",
-  "ph.s1": "Enquiry", "ph.d1": "Describe your matter on WhatsApp or in the form below. We reply during business hours: Mon-Fri, 09:00-18:00.",
+  "ph.s1": "Enquiry", "ph.d1": "Describe your matter on WhatsApp, call us directly or fill in the form below - we will get back to you shortly, and every enquiry is handled personally.",
   "ph.s2": "Assessment", "ph.d2": "We review the documents, assess the prospects and risks, and propose a strategy and action plan.",
   "ph.s3": "Terms", "ph.d3": "Scope, timelines and fees are fixed in the engagement agreement. No hidden charges.",
-  "ph.s4": "Work", "ph.d4": "We run the dispute, transaction or project through to the result and keep you informed in English or Russian.",
+  "ph.s4": "Work", "ph.d4": "We run the dispute, transaction or project through to the result, in English or Russian. You have access to the project's progress - the status is updated daily, so you always see the full picture: what has been done and what comes next.",
   "ph.fee": "Fees are quoted individually", "ph.feed": "They depend on the scope of work, the project and the amount in dispute. There is no price list: we assess each matter separately and quote before the work begins.",
-  "z.kick": "Enquiry", "z.h2": "Describe your matter - we reply during business hours",
-  "z.i1": "Briefly: who you are, what the matter is, what the timeline is",
+  "z.kick": "Enquiry", "z.h2": "Describe your matter - we will reply shortly",
+  "z.i1": "Briefly: a little about yourself, the matter and the timeline",
   "z.i2": "The form opens WhatsApp with a ready message - nothing to retype",
   "z.i3": "Confidential: details are discussed with you only",
   "z.name": "Name", "z.namep": "How should we address you", "z.comp": "Company", "z.compp": "Name or industry",
@@ -187,7 +193,7 @@ var EN = {
   "z.ok": "Thank you. WhatsApp has opened with your message - if the window did not appear, contact us directly: +7 707 790 6095.",
   "z.btn": "Send via WhatsApp", "z.note": "By clicking the button you agree to the processing of the details provided in order to respond to your enquiry.",
   "k.kick": "Contact", "k.h2": "Avermont Legal LLP",
-  "k.lead": "Almaty, Kazakhstan. We advise clients across Kazakhstan and abroad - in person, online and in writing, in English and Russian.",
+  "k.lead": "Almaty, Kazakhstan. We advise clients across Kazakhstan and abroad - in person, online and in writing - we run projects in three languages.",
   "k.tel": "Phone and WhatsApp", "k.city": "City", "k.cityv": "Almaty, Kazakhstan", "k.hours": "Business hours", "k.hoursv": "Mon-Fri, 09:00-18:00",
   "k.wa": "Message on WhatsApp", "k.mail": "Send an e-mail", "k.alt": "Almaty: mountains and business districts", "k.word": "Almaty",
   "ftr.c": "&copy; 2026 Avermont Legal LLP · Almaty, Kazakhstan",
@@ -269,6 +275,7 @@ function applyLang(lang){
     b.setAttribute("aria-pressed", on ? "true" : "false");
   });
   try { localStorage.setItem("al-lang", en ? "en" : "ru"); } catch(e){}
+  try { document.dispatchEvent(new CustomEvent("al:lang", {detail: en ? "en" : "ru"})); } catch(e){}
   setWaLinks();
   fillTicker();
   requestAnimationFrame(function(){ fitText(); heroKnock(); update(); });
@@ -389,7 +396,7 @@ function hdrState(){
   if (!hdr) return;
   var solid = scrollY > 40;
   hdr.classList.toggle("solid", solid);
-  hdr.classList.toggle("dark", !solid);  /* вверху страницы под шапкой тёмный кадр героя */
+  hdr.classList.toggle("dark", !solid && !!hero);  /* вверху главной под шапкой тёмный кадр героя; на внутренних страницах героя нет */
 }
 
 /* ---------------- ПЛИТЫ, ГЕРОЙ, КАДРЫ ----------------
