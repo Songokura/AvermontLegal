@@ -175,7 +175,7 @@ function renderView(){
       '<a class="btn btn-solid sm" href="' + esc(viewUrl(it.pdf)) + '" target="_blank" rel="noopener"><span>' + esc(T[L].open) + '</span><i class="ar" aria-hidden="true">&#8599;</i></a>' +
       '<a class="btn btn-ghost sm" href="' + esc(dlUrl(it.pdf)) + '" target="_blank" rel="noopener"><span>' + esc(T[L].dl) + '</span></a>' +
     '</div>' +
-    '<div class="pv-frame"><iframe src="https://drive.google.com/file/d/' + encodeURIComponent(it.pdf) + '/preview" title="' + esc(T[L].frame) + '" loading="lazy" allow="autoplay" referrerpolicy="no-referrer"></iframe></div>';
+    '<div class="pv-frame"><iframe src="https://drive.google.com/file/d/' + encodeURIComponent(it.pdf) + '/preview" title="' + esc(T[L].frame) + '" allow="autoplay" allowfullscreen></iframe></div>';
 }
 
 function render(){ renderLists(); renderView(); }
