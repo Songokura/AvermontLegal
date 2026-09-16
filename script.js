@@ -108,7 +108,7 @@ var EN = {
   "p7.l3": "Disputes with national companies",
   "p7.l4": "Public procurement disputes and challenges, including Samruk-Kazyna procurement and the Goszakup system",
   "p7.note": "We represent businesses in disputes with state authorities, national companies and procuring entities.",
-  "p7.alt": "Colonnade of a courthouse", "p7.word": "State",
+  "p7.alt": "A lawyer and a client reviewing documents at a desk", "p7.word": "State",
   "cs.kick": "Case studies", "cs.h2": "Case studies: <em>situation, action, result</em>",
   "cs.lead": "Anonymised examples across our practice areas. We do not disclose client names or details that could identify them.",
   "cs.ls": "Situation", "cs.lw": "What we did", "cs.lr": "Result", "cs.more": "How it went",
