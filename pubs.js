@@ -10,7 +10,11 @@
 "use strict";
 
 var SHEET = "1JRp6pwtoJ_vYA3mpU7kVBBxKELfGte1JXvYCt1cLBqg";
-var CSV = "https://docs.google.com/spreadsheets/d/" + SHEET + "/export?format=csv&gid=0";
+/* первый лист таблицы. gid не указывать: у таблицы, созданной из CSV, лист не 0, и адрес с gid=0 отдаёт страницу входа */
+var SRC = [
+  "https://docs.google.com/spreadsheets/d/" + SHEET + "/export?format=csv",
+  "https://docs.google.com/spreadsheets/d/" + SHEET + "/gviz/tq?tqx=out:csv"   /* запасной */
+];
 var CACHE = "al-pubs-v1", TTL = 5 * 60 * 1000;
 
 var T = {
@@ -92,12 +96,21 @@ function load(){
     var c = JSON.parse(sessionStorage.getItem(CACHE) || "null");
     if (c && Date.now() - c.t < TTL) return Promise.resolve(c.rows);
   } catch(e){}
-  return fetch(CSV, {credentials: "omit"}).then(function(r){
-    if (!r.ok) throw new Error("HTTP " + r.status);
-    return r.text();
-  }).then(function(t){
-    if (/^\s*</.test(t)) throw new Error("not csv");     /* закрытая таблица отдаёт страницу входа */
-    var rows = parseCSV(t);
+  function get(k){
+    return fetch(SRC[k], {credentials: "omit", cache: "no-store"}).then(function(r){
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.text();
+    }).then(function(t){
+      if (/^\s*</.test(t)) throw new Error("not csv");   /* закрытая таблица отдаёт страницу входа */
+      var rows = parseCSV(t);
+      if (rows.length < 2) throw new Error("empty");
+      return rows;
+    }).catch(function(e){
+      if (k + 1 < SRC.length) return get(k + 1);
+      throw e;
+    });
+  }
+  return get(0).then(function(rows){
     try { sessionStorage.setItem(CACHE, JSON.stringify({t: Date.now(), rows: rows})); } catch(e){}
     return rows;
   });
