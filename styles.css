@@ -1,25 +1,24 @@
 /* ============================================================
    AVERMONT LEGAL - business law firm, Almaty. Стили = дизайн-система.
-   Сигнатура: БЛИНТОВОЕ ТИСНЕНИЕ. Лист бумаги ложится на кадр, заголовок
-   вдавлен в бумагу, и фото проступает только сквозь буквы; по прокрутке
-   лист снимается и кадр открывается целиком. В плитах и статичных блоках
-   практик - тот же приём в рамке (.frame): слово практики вдавлено в лист,
-   лист уходит по --open. В каталожных секциях - тон-в-тон рельеф цифр (.emb).
+   Сигнатура: БЛИНТОВОЕ ТИСНЕНИЕ. В кадрах практик (.frame) слово вдавлено
+   в лист бумаги, фото проступает сквозь буквы, лист уходит по --open.
+   Герой (с 16.09.2026) без листа: кадр виден сразу и гаснет по прокрутке (--hf).
+   Цифры блока доверия - белым рельефом, чтобы читались на тёмном.
    Поверх фото в покое ничего нет.
    Компоненты не привязаны к id: .prac (практика), .frame (кадр с листом),
    .sec / .sh (секция и её голова), .btn, .kick, .facts, .steps, .form.
    Переменные плит: .pw пишет --enter/--exit/--stay, .frame - --open,
-   герой - --sh (непрозрачность листа) и --kp (доля белого в тексте).
+   герой - --hf (затухание кадра 0…1).
    ============================================================ */
 :root{
-  --navy:#102854; --navy2:#0B1D3F; --deep:#0A1730; --ink:#13203D; --ink2:#2E3A57;
-  --mut:#5F6980; --mut2:#8B94A8; --steel:#98A3B8;
+  --navy:#102854; --navy2:#0B1D3F; --deep:#0A1730; --ink:#1A1F2B; --ink2:#2F3542;
+  --mut:#4A505D; --mut2:#666C78; --steel:#AEB7C8;
   --paper:#F6F4EF; --paper2:#FFFFFF; --stone:#E9E5DD; --stone2:#DCD7CD;
   --line:rgba(16,40,84,.12); --wa:#25D366;
   --fd:"Noto Serif Display",Georgia,"Times New Roman",serif;
   --ft:"Mulish","Segoe UI",Arial,sans-serif;
   --hh:72px;
-  --enter:0; --exit:0; --stay:0; --open:0; --sh:1; --kp:0%;
+  --enter:0; --exit:0; --stay:0; --open:0; --hf:0;
   --hp:50% 50%;
   --hgrad:linear-gradient(180deg,rgba(10,23,48,.32),rgba(10,23,48,.22) 35%,rgba(10,23,48,.62) 70%,rgba(10,23,48,.86));
   --fgrad:linear-gradient(180deg,rgba(10,23,48,.16),rgba(10,23,48,.34));
@@ -28,8 +27,8 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 var(--ft);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-@media(min-width:761px){body{font-size:16px}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15.5px/1.6 var(--ft);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+@media(min-width:761px){body{font-size:16.5px}}
 img,video,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit}
@@ -45,14 +44,14 @@ ul{padding:0;list-style:none}
 .kick{display:flex;align-items:center;gap:12px;font:700 11px/1.2 var(--ft);letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
 .kick::before{content:"";width:28px;height:1px;flex:0 0 auto;background:currentColor;opacity:.7}
 .h2{font:400 clamp(30px,4.2vw,54px)/1.08 var(--fd);letter-spacing:-.005em;margin-top:16px;color:var(--navy)}
-.h2 em{font-style:italic;font-weight:300}
+.h2 em{font-style:italic;font-weight:400}
 .lead{margin-top:14px;font-size:15.5px;line-height:1.6;color:var(--mut)}
 @media(min-width:761px){.lead{font-size:17.5px;margin-top:18px}}
 .sh{margin-bottom:36px}
 @media(min-width:761px){.sh{margin-bottom:50px}}
 /* рельеф тон-в-тон: цифры и слова, «вдавленные» в бумагу (светлый и тёмный вариант) */
-.emb{color:var(--paper);text-shadow:-1px -1px 0 rgba(255,255,255,.95),1px 1px 0 rgba(16,40,84,.26),0 0 1px rgba(16,40,84,.08)}
-.dark .emb{color:var(--deep);text-shadow:-1px -1px 0 rgba(255,255,255,.12),1px 1px 0 rgba(0,0,0,.65)}
+.emb{color:var(--navy);text-shadow:-1px -1px 0 rgba(255,255,255,.95),1px 1px 0 rgba(16,40,84,.26),0 0 1px rgba(16,40,84,.08)}
+.dark .emb{color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.45),0 0 24px rgba(255,255,255,.08)}
 
 /* ---------- кнопки ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:2px;border:1px solid transparent;font:600 14px/1 var(--ft);letter-spacing:.04em;cursor:pointer;white-space:nowrap;transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s,color .35s,border-color .35s,box-shadow .35s;position:relative}
@@ -104,7 +103,7 @@ body.menu-open .burger span:nth-child(3){transform:translateY(-7.5px) rotate(-45
 .mnav::before{content:"";position:absolute;inset:0;background:var(--grain);pointer-events:none;opacity:.7}
 body.menu-open .mnav{visibility:visible;transform:none;transition:transform .45s cubic-bezier(.2,.7,.2,1),visibility 0s}
 .mnav-list{width:min(560px,100%);margin-inline:auto;position:relative}
-.mnav-list a{display:block;font:300 clamp(22px,5.2vw,32px)/1.2 var(--fd);padding:7px 0;border-bottom:1px solid var(--line);transition:color .25s,padding-left .3s}
+.mnav-list a{display:block;font:400 clamp(22px,5.2vw,32px)/1.2 var(--fd);padding:7px 0;border-bottom:1px solid var(--line);transition:color .25s,padding-left .3s}
 .mnav-list a:hover{padding-left:8px}
 .mnav-foot{width:min(560px,100%);margin:26px auto 0;display:flex;flex-wrap:wrap;gap:10px;position:relative}
 .mnav-foot a{display:inline-flex;align-items:center;gap:8px;font:600 14px/1 var(--ft);color:var(--navy);padding:13px 18px;border:1px solid rgba(16,40,84,.3);border-radius:2px}
@@ -133,7 +132,7 @@ body:not(.menu-open) .hdr.dark .call{background:#fff;color:var(--navy)}
 .pw.gone .plate{visibility:hidden}
 html.no-plate .plate{transform:none;border-radius:0}
 html.no-plate .plate::after{display:none}
-html.no-plate .pw,html.no-plate .frame{--open:1;--enter:1;--sh:0;--kp:100%}
+html.no-plate .pw,html.no-plate .frame{--open:1;--enter:1;--hf:0}
 
 /* ---------- лист бумаги (общий компонент) ----------
    .sheet - бумага с зерном; непрозрачность задаётся снаружи (--sh или 1 - --open). */
@@ -142,42 +141,37 @@ html.no-plate .pw,html.no-plate .frame{--open:1;--enter:1;--sh:0;--kp:100%}
 .sheet::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.55),transparent 40%,transparent 70%,rgba(16,40,84,.05))}
 
 /* ---------- герой ----------
-   Слои: фото -> лист (--sh) -> текст. Заголовок .big прозрачный, а у блока текста
-   фон - тот же кадр в той же геометрии (cover, --hp), обрезанный по буквам:
-   фото проступает сквозь буквы, как сквозь тонкую бумагу в месте тиснения.
-   По прокрутке лист уходит, --kp растёт и текст становится белым на фото. */
+   Слои: фото (гаснет по --hf) -> текст. Текст белый с первого кадра.
+   Заголовок .big - белый, фон-кадр внутри букв (--hbg) остаётся для совместимости со скриптом. */
 .hero{background:var(--deep)}
-.hero-bg{position:absolute;inset:0;z-index:1;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:1;overflow:hidden;opacity:calc(1 - .82 * var(--hf))}
 .hero-bg picture{display:block;width:100%;height:100%}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:var(--hp);transform:scale(calc(1 + .06 * var(--exit)))}
-/* постоянный грейд кадра: тот же градиент повторён внутри букв заголовка, поэтому шва нет */
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:var(--hp);transform:scale(calc(1.02 + .06 * var(--hf)))}
 .hero-bg::after{content:"";position:absolute;inset:0;background:var(--hgrad);pointer-events:none}
-.hero .sheet{z-index:2;opacity:var(--sh);transform:translateY(calc(-14px * (1 - var(--sh)))) scale(calc(1 + .012 * (1 - var(--sh))));transform-origin:50% 100%;will-change:opacity,transform}
-.hero-txt{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--hh) + 20px) 0 92px;color:color-mix(in srgb,#fff var(--kp),var(--navy))}
+.hero-txt{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--hh) + 20px) 0 92px;color:#fff}
 .hero-txt .wrap{width:min(1200px,100% - 32px)}
 @media(min-width:761px){.hero-txt .wrap{width:min(1200px,100% - 64px)}}
 .hero-txt > .wrap > *{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
 .hero.on .hero-txt > .wrap > *{opacity:1;transform:none}
 .hero-txt > .wrap > :nth-child(2){transition-delay:.12s}.hero-txt > .wrap > :nth-child(3){transition-delay:.24s}.hero-txt > .wrap > :nth-child(4){transition-delay:.36s}
-.hero .kick{color:color-mix(in srgb,rgba(255,255,255,.85) var(--kp),var(--mut))}
-.h1{font:400 clamp(40px,min(7.4vw,11svh),118px)/1 var(--fd);letter-spacing:-.012em;margin-top:18px}
-/* буквы прозрачные, фон - кадр героя в геометрии cover (размер и сдвиг считает JS: --hbs/--hbp),
-   поверх - тот же грейд, что на кадре (--hgs/--hgp). Фото проступает сквозь буквы без шва. */
+.hero .kick{color:rgba(255,255,255,.88)}
+.h1{font:400 clamp(40px,min(7.4vw,11svh),118px)/1 var(--fd);letter-spacing:-.012em;margin-top:18px;text-shadow:0 2px 30px rgba(10,23,48,.35)}
 .h1 .bigw{display:grid;white-space:nowrap}
 .h1 .big,.h1 .big-sh{grid-area:1/1;display:block;font-size:inherit;transition:none}
-/* тень тиснения - отдельным слоем ПОД окном: с background-clip:text тень рисуется поверх фона и закрывает его */
-.h1 .big-sh{color:transparent;text-shadow:-1px -1px 0 rgba(255,255,255,calc(.9 * (1 - var(--kp) / 100%))),1px 1px 0 rgba(16,40,84,calc(.3 * (1 - var(--kp) / 100%)))}
-.h1 .big{color:color-mix(in srgb,#fff var(--kp),transparent);background-image:var(--hgrad),var(--hbg);background-size:var(--hgs,100% 100%),var(--hbs,cover);background-position:var(--hgp,0 0),var(--hbp,50% 50%);background-repeat:no-repeat;-webkit-background-clip:text;background-clip:text}
-.h1 .sub{display:block;font-size:clamp(19px,2.1vw,30px);font-weight:300;line-height:1.25;margin-top:.45em;letter-spacing:0;color:color-mix(in srgb,rgba(255,255,255,.92) var(--kp),var(--ink2))}
-.hero .lead{max-width:none;color:color-mix(in srgb,rgba(255,255,255,.82) var(--kp),var(--mut));font-size:16px}
+.h1 .big-sh{display:none}
+.h1 .big{color:#fff}
+.h1 .sub{display:block;font-size:clamp(19px,2.1vw,30px);font-weight:400;line-height:1.25;margin-top:.45em;letter-spacing:0;color:rgba(255,255,255,.95)}
+.hero .lead{max-width:none;color:rgba(255,255,255,.9);font-size:16px}
 @media(min-width:761px){.hero .lead{font-size:17.5px}}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 .hero-cta .btn{min-width:210px}
-.hero .btn-solid{background:color-mix(in srgb,#fff var(--kp),var(--navy));color:color-mix(in srgb,var(--navy) var(--kp),#fff);box-shadow:none}
-.hero .btn-solid svg{color:color-mix(in srgb,var(--wa) var(--kp),#fff)}
-.hero .btn-ghost{color:color-mix(in srgb,#fff var(--kp),var(--navy));border-color:color-mix(in srgb,rgba(255,255,255,.6) var(--kp),rgba(16,40,84,.45))}
+.hero .btn-solid{background:#fff;color:var(--navy);box-shadow:none}
+.hero .btn-solid:hover{background:var(--paper)}
+.hero .btn-solid svg{color:var(--wa)}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.6)}
+.hero .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 /* бегущая строка юрисдикций внизу героя */
-.ticker-w{position:absolute;left:0;right:0;bottom:0;z-index:4;height:46px;display:flex;align-items:center;overflow:hidden;border-top:1px solid color-mix(in srgb,rgba(255,255,255,.22) var(--kp),var(--line));background:color-mix(in srgb,rgba(10,23,48,.35) var(--kp),rgba(246,244,239,.55));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:color-mix(in srgb,rgba(255,255,255,.8) var(--kp),var(--mut))}
+.ticker-w{position:absolute;left:0;right:0;bottom:0;z-index:4;height:46px;display:flex;align-items:center;overflow:hidden;border-top:1px solid rgba(255,255,255,.22);background:rgba(10,23,48,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:rgba(255,255,255,.85)}
 .ticker{display:flex;white-space:nowrap;animation:tk var(--tkd,60s) linear infinite;will-change:transform}
 .ticker b{flex:0 0 auto;font:700 10.5px/1 var(--ft);letter-spacing:.22em;text-transform:uppercase;padding:0 26px;position:relative}
 .ticker b::before{content:"";position:absolute;left:-2px;top:50%;width:4px;height:4px;margin-top:-2px;border-radius:50%;background:currentColor;opacity:.6}
@@ -210,9 +204,9 @@ html.no-plate .pw,html.no-plate .frame{--open:1;--enter:1;--sh:0;--kp:100%}
 html.no-plate .plate .txt > *,html.no-plate .hero-txt > .wrap > *{opacity:1;transform:none;transition:none}
 .prac .h2{font-size:clamp(28px,min(3.4vw,6svh),50px)}
 .prac .bul{margin-top:22px;display:grid;gap:10px}
-.prac .bul li{position:relative;padding-left:26px;font-size:15px;line-height:1.5;color:var(--ink2)}
+.prac .bul li{position:relative;padding-left:26px;font-size:16px;line-height:1.55;color:var(--ink)}
 .prac .bul li::before{content:"";position:absolute;left:0;top:.72em;width:14px;height:1px;background:var(--navy);opacity:.7}
-.prac .note{margin-top:14px;font-size:13px;color:var(--mut2)}
+.prac .note{margin-top:14px;font-size:14px;color:var(--mut)}
 .prac .cta{margin-top:24px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 /* кадр: фото, лист с тиснёным словом. --open 0 - лист лежит, 1 - лист снят */
 .frame{position:relative;overflow:hidden;background:var(--stone);aspect-ratio:4/3;box-shadow:0 40px 70px -46px rgba(16,40,84,.55);isolation:isolate}
@@ -233,7 +227,7 @@ html.no-plate .plate .txt > *,html.no-plate .hero-txt > .wrap > *{opacity:1;tran
   .prac .kick{font-size:10px;letter-spacing:.16em}
   .prac .h2{font-size:clamp(24px,6.4vw,32px);margin-top:8px}
   .prac .bul{margin-top:14px;gap:7px}
-  .prac .bul li{font-size:14px;line-height:1.45}
+  .prac .bul li{font-size:15px;line-height:1.45}
   .prac .note{display:none}
   .prac .cta{margin-top:16px}
   .prac .cta .btn{height:48px;padding:0 20px;flex:1 1 100%}
@@ -250,7 +244,7 @@ html.no-plate .plate .txt > *,html.no-plate .hero-txt > .wrap > *{opacity:1;tran
 .sec.dark{background:var(--deep);color:#fff}
 .sec.dark .kick{color:var(--steel)}
 .sec.dark .h2{color:#fff}
-.sec.dark .lead{color:rgba(255,255,255,.72)}
+.sec.dark .lead{color:rgba(255,255,255,.88)}
 .sec > .wrap{position:relative;z-index:2}
 [id]{scroll-margin-top:calc(var(--hh) + 10px)}
 .pw[id]{scroll-margin-top:0}
@@ -259,7 +253,7 @@ html.no-plate .plate .txt > *,html.no-plate .hero-txt > .wrap > *{opacity:1;tran
 html.no-plate .rv{opacity:1;transform:none;transition:none}
 #zayavka.rv,#kontakty.rv,#podhod.rv,#opyt.rv{transform:none}
 .sec .prac-in{height:auto;padding-top:0;padding-bottom:0}
-.sec + .sec.prac{padding-top:0}
+.sec.prac + .sec.prac{padding-top:24px}
 
 /* география: плитки городов */
 .geo{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -278,25 +272,64 @@ html.no-plate .rv{opacity:1;transform:none;transition:none}
 /* почему нам доверяют: факты рельефом + кадр */
 .opyt{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,80px);align-items:center}
 .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:34px}
-.facts li{padding:24px 22px 22px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);display:grid;gap:8px}
-.facts b{font:300 clamp(44px,4.6vw,66px)/1 var(--fd);letter-spacing:-.01em;font-variant-numeric:lining-nums}
-.facts span{font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.7)}
+.facts li{padding:24px 22px 22px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);display:grid;gap:8px}
+.facts b{font:400 clamp(44px,4.6vw,66px)/1 var(--fd);letter-spacing:-.01em;font-variant-numeric:lining-nums}
+.facts span{font-size:15px;line-height:1.5;color:rgba(255,255,255,.9)}
 .opyt .frame{aspect-ratio:4/5}
 @media(max-width:900px){.opyt{grid-template-columns:1fr;gap:26px}.opyt .frame{aspect-ratio:16/10}.facts{gap:10px;margin-top:24px}.facts li{padding:18px 16px}}
 @media(max-width:420px){.facts{grid-template-columns:1fr}}
 
 /* как работаем: шаги 01-04, номер рельефом */
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-.step{padding:26px 22px 28px;background:var(--paper2);box-shadow:0 1px 0 var(--line);display:grid;gap:10px;align-content:start;position:relative;transition:transform .35s,box-shadow .35s}
-.step:hover{transform:translateY(-3px);box-shadow:0 1px 0 var(--line),0 30px 50px -36px rgba(16,40,84,.5)}
-.step .n{font:300 54px/1 var(--fd);color:var(--paper2);text-shadow:-1px -1px 0 rgba(255,255,255,1),1.5px 1.5px 0 rgba(16,40,84,.42);font-variant-numeric:lining-nums;letter-spacing:-.02em}
-.step h3{font:400 21px/1.2 var(--fd);color:var(--navy);margin-top:4px}
-.step p{font-size:14px;color:var(--mut);line-height:1.5}
+.step{padding:26px 22px 28px;background:var(--navy);color:#fff;box-shadow:0 30px 50px -40px rgba(16,40,84,.6);display:grid;gap:10px;align-content:start;position:relative;transition:transform .35s,box-shadow .35s}
+.step:hover{transform:translateY(-3px);box-shadow:0 34px 56px -34px rgba(16,40,84,.75)}
+.step .n{font:400 54px/1 var(--fd);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.4);font-variant-numeric:lining-nums;letter-spacing:-.02em}
+.step h3{font:500 22px/1.2 var(--fd);color:#fff;margin-top:4px}
+.step p{font-size:15px;color:rgba(255,255,255,.88);line-height:1.55}
 .fee{margin-top:28px;padding:24px 26px;border-left:1px solid var(--navy);display:grid;gap:6px;max-width:100%}
 .fee b{font:400 20px/1.25 var(--fd);color:var(--navy)}
-.fee p{font-size:14.5px;color:var(--mut)}
+.fee p{font-size:15.5px;color:var(--ink2)}
 @media(max-width:1000px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.steps{grid-template-columns:1fr;gap:10px}.step{padding:18px 18px 20px}.step .n{font-size:44px}.fee{padding:18px 18px}}
+
+/* кейсы: список слева, кейс справа (десктоп); на узком - один кейс, «как это было» раскрывается */
+.cases{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,3vw,44px);align-items:start}
+.case-nav{display:grid;gap:2px;position:sticky;top:calc(var(--hh) + 20px)}
+.ct{display:grid;gap:4px;text-align:left;padding:14px 18px 14px 20px;border:0;border-left:2px solid transparent;background:transparent;cursor:pointer;transition:background .25s,border-color .25s}
+.ct small{font:700 10.5px/1.3 var(--ft);letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+.ct span{font:500 15.5px/1.35 var(--ft);color:var(--ink2)}
+.ct:hover{background:rgba(255,255,255,.55)}
+.ct.is-on{background:var(--paper2);border-left-color:var(--navy)}
+.ct.is-on span{color:var(--navy)}
+.case-panel{background:var(--paper2);padding:clamp(22px,3.4vw,44px);box-shadow:0 40px 70px -50px rgba(16,40,84,.45)}
+.case-tag{font:700 11px/1.3 var(--ft);letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.case h3{font:500 clamp(24px,2.5vw,34px)/1.15 var(--fd);color:var(--navy);margin-top:10px}
+.case-body{display:grid;gap:18px;margin-top:22px}
+.cb b,.case-res b{display:block;font:700 11px/1.2 var(--ft);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.cb b{color:var(--navy)}
+.cb p{font-size:16px;line-height:1.65;color:var(--ink)}
+.case-res{margin-top:22px;padding:20px 22px;background:var(--navy);color:#fff}
+.case-res b{color:rgba(255,255,255,.75)}
+.case-res p{font-size:16.5px;line-height:1.6}
+.case-more{display:none}
+.case-arrows{display:flex;gap:10px;justify-content:flex-end;margin-top:22px}
+.ca{width:48px;height:48px;border-radius:50%;border:1px solid rgba(16,40,84,.35);background:transparent;color:var(--navy);font-size:18px;cursor:pointer;display:grid;place-items:center;transition:background .25s,color .25s,opacity .25s}
+.ca:hover:not(:disabled){background:var(--navy);color:#fff}
+.ca:disabled{opacity:.3;cursor:default}
+@media(max-width:900px){
+  .cases{grid-template-columns:1fr}
+  .case-nav{display:none}
+  .case-panel{padding:22px 18px}
+  .case .case-body{display:none}
+  .case.open .case-body{display:grid}
+  .case-res{margin-top:16px;padding:16px 16px}
+  .case-res p,.cb p{font-size:15px}
+  .case-more{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:0;border:0;background:transparent;color:var(--navy);font:700 13px/1 var(--ft);letter-spacing:.06em;cursor:pointer;border-bottom:1px solid rgba(16,40,84,.4);padding-bottom:6px}
+  .case-more i{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-3px);transition:transform .3s}
+  .case.open .case-more i{transform:rotate(-135deg)}
+  .case.open .case-body{order:0}
+  .case-arrows{justify-content:space-between}
+}
 
 /* заявка */
 .zay{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,80px);align-items:start}
@@ -315,7 +348,7 @@ html.no-plate .rv{opacity:1;transform:none;transition:none}
 .form .msg{font-size:14px;padding:12px 14px;border-radius:2px}
 .form .msg.ok{background:rgba(37,211,102,.12);color:#1A6B3A}
 .form .msg.err{background:rgba(180,40,60,.08);color:#8E2A3C}
-.form .note{font-size:12px;color:var(--mut2);line-height:1.45}
+.form .note{font-size:12.5px;color:var(--mut);line-height:1.45}
 .form .btn{width:100%}
 @media(max-width:900px){.zay{grid-template-columns:1fr;gap:28px}.zay .side{position:static}}
 @media(max-width:560px){.form{grid-template-columns:1fr;padding:18px;gap:12px}.form .btn{white-space:normal;height:auto;min-height:52px;padding:12px 20px;line-height:1.2}}
@@ -325,9 +358,9 @@ html.no-plate .rv{opacity:1;transform:none;transition:none}
 .kl{display:grid;gap:26px}
 .krow{display:grid;gap:6px}
 .kt{font:700 10.5px/1.2 var(--ft);letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
-.krow a.big{font:300 clamp(28px,3.4vw,44px)/1.1 var(--fd);color:var(--navy);transition:color .25s;font-variant-numeric:lining-nums}
+.krow a.big{font:400 clamp(28px,3.4vw,44px)/1.1 var(--fd);color:var(--navy);transition:color .25s;font-variant-numeric:lining-nums}
 .krow a.big:hover{color:var(--ink)}
-.krow a.mid{font:300 clamp(20px,2.2vw,28px)/1.2 var(--fd);color:var(--navy);word-break:break-all}
+.krow a.mid{font:400 clamp(20px,2.2vw,28px)/1.2 var(--fd);color:var(--navy);word-break:break-all}
 .krow .kv{font-size:15.5px;color:var(--ink2)}
 .soc{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
 .kont .frame{aspect-ratio:4/5}
