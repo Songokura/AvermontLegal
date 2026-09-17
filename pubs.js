@@ -15,7 +15,9 @@ var SRC = [
   "https://docs.google.com/spreadsheets/d/" + SHEET + "/export?format=csv",
   "https://docs.google.com/spreadsheets/d/" + SHEET + "/gviz/tq?tqx=out:csv"   /* запасной */
 ];
-var CACHE = "al-pubs-v1", TTL = 5 * 60 * 1000;
+/* кэш вкладки - только для мгновенной первой отрисовки; таблица перечитывается при каждом открытии,
+   иначе переключение «да/нет» в таблице не видно до истечения срока кэша */
+var CACHE = "al-pubs-v2";
 
 var T = {
   ru: { read: "Читать", open: "Открыть PDF", dl: "Скачать PDF", empty: "Публикации скоро появятся.",
@@ -87,15 +89,21 @@ function toItems(rows){
       slug: slugify(r[9]) || ("pub-" + (i + 1))
     });
   });
+  var seen = {};
+  out.forEach(function(it){                    /* одинаковый адрес у двух строк - второй получает суффикс */
+    var base = it.slug, n = 2;
+    while (seen[it.slug]) it.slug = base + "-" + n++;
+    seen[it.slug] = 1;
+  });
   out.sort(function(a, b){ return (b.date ? +b.date : 0) - (a.date ? +a.date : 0); });
   return out;
 }
 
+function cached(){
+  try { var c = JSON.parse(sessionStorage.getItem(CACHE) || "null"); return c && c.rows || null; }
+  catch(e){ return null; }
+}
 function load(){
-  try {
-    var c = JSON.parse(sessionStorage.getItem(CACHE) || "null");
-    if (c && Date.now() - c.t < TTL) return Promise.resolve(c.rows);
-  } catch(e){}
   function get(k){
     return fetch(SRC[k], {credentials: "omit", cache: "no-store"}).then(function(r){
       if (!r.ok) throw new Error("HTTP " + r.status);
@@ -182,7 +190,9 @@ function render(){ renderLists(); renderView(); }
 
 document.addEventListener("al:lang", render);
 if (!document.querySelector("[data-pubs], #pub-view")) return;
+var early = cached();
+if (early) items = toItems(early);
 render();
-load().then(function(rows){ items = toItems(rows); render(); })
-      .catch(function(){ failed = true; items = null; render(); });
+load().then(function(rows){ items = toItems(rows); failed = false; render(); })
+      .catch(function(){ if (!early) { failed = true; items = null; render(); } });
 })();
