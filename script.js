@@ -555,10 +555,44 @@ if (form) form.addEventListener("submit", function(e){
   window.open("https://wa.me/" + CONTACT.wa + "?text=" + encodeURIComponent(t), "_blank", "noopener");
 });
 
+/* ---------------- СОГЛАСИЕ НА COOKIE ----------------
+   Политика от 18.09.2026, п. 4.4: согласие - использование сайта с включёнными cookie,
+   плашка уведомляет и ведёт на политику. «Принять» запоминается в localStorage. */
+var CK = {
+  ru: { t: "Сайт использует cookie, в том числе рекламные cookie Google Ads. Продолжая пользоваться сайтом, вы соглашаетесь с <a href=\"privacy.html\">Политикой конфиденциальности</a>.", ok: "Принять", aria: "Уведомление о cookie" },
+  en: { t: "This website uses cookies, including Google Ads advertising cookies. By continuing to use it, you agree to our <a href=\"privacy.html\">Privacy Policy</a>.", ok: "Accept", aria: "Cookie notice" }
+};
+var ck = null;
+function ckText(){
+  if (!ck) return;
+  var d = CK[curLang()];
+  ck.setAttribute("aria-label", d.aria);
+  ck.querySelector(".ck-t").innerHTML = d.t;
+  ck.querySelector(".ck-ok").textContent = d.ok;
+}
+(function(){
+  var done = null;
+  try { done = localStorage.getItem("al-cookie"); } catch(e){}
+  if (done) return;
+  ck = document.createElement("div");
+  ck.className = "ck";
+  ck.setAttribute("role", "region");
+  ck.innerHTML = '<p class="ck-t"></p><button type="button" class="btn btn-solid ck-ok"></button>';
+  document.body.appendChild(ck);
+  ck.querySelector(".ck-ok").addEventListener("click", function(){
+    try { localStorage.setItem("al-cookie", "1"); } catch(e){}
+    ck.classList.remove("show");
+    setTimeout(function(){ if (ck) { ck.remove(); ck = null; } }, 500);
+  });
+  document.addEventListener("al:lang", ckText);
+  setTimeout(function(){ if (ck) ck.classList.add("show"); }, 900);
+})();
+
 /* ---------------- СТАРТ ---------------- */
 snapshot();
 bindFrames();
 initLang();
+ckText();
 fillTicker();
 fitText();
 hdrState();
