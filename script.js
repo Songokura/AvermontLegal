@@ -61,7 +61,7 @@ var EN = {
   "p1.l2": "Recovery of substantial debts: demand letters, litigation, interim measures, enforcement",
   "p1.l3": "Representation before the courts of Kazakhstan at every level - from first instance to the Supreme Court of the Republic of Kazakhstan, including applications for a submission by the Chairman of the Supreme Court",
   "p1.l4": "Case strategy before filing: assessment of merits, evidence and risks",
-  "p1.note": "We act for businesses in matters of significant value. No consumer or personal cases.",
+  "p1.note": "We recover debts for companies and private individuals - from KZT 1 million. No consumer or household cases.",
   "p1.alt": "Boardroom in a business centre overlooking the city", "p1.word": "Disputes",
   "p2.kick": "Миграционное сопровождение", "p2.h2": "Immigration support <em>for business</em>",
   "p2.l1": "Assistance with C3 and C5 work and business visas: documents and guidance",
